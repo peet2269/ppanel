@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-peet-panel —— 极简中文服务器监控面板（自搓版）
+ppanel —— 极简中文服务器监控面板
 
 设计目标（对齐大王需求）：
   · 概览：本机跑的各个服务是否正常
@@ -970,7 +970,7 @@ def _alerts_payload() -> dict:
 # ───────────────────────── HTTP ─────────────────────────
 
 class Handler(BaseHTTPRequestHandler):
-    server_version = 'peet-panel/1.0'
+    server_version = 'ppanel/1.0'
 
     def log_message(self, *a):        # 别把面板自己的日志也写进 nginx log
         pass
@@ -1061,13 +1061,13 @@ def main():
     port = int(os.environ.get('PANEL_PORT', '8090'))
     _ensure_data_dir()
     _prune_archives()
-    print(f'peet-panel data dir: {DATA_DIR}', flush=True)
+    print(f'ppanel data dir: {DATA_DIR}', flush=True)
     print(f'archive ranges: {"/".join(RANGES)}', flush=True)
     # 后台采样：保证任何时候打开页面都有历史曲线
     threading.Thread(target=_sampler_loop, daemon=True).start()
     srv = ThreadingHTTPServer(('127.0.0.1', port), Handler)
     srv.daemon_threads = True
-    print(f'peet-panel listening on 127.0.0.1:{port}', flush=True)
+    print(f'ppanel listening on 127.0.0.1:{port}', flush=True)
     srv.serve_forever()
 
 
