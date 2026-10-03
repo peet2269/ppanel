@@ -1,4 +1,4 @@
-# 瞭望塔 · peet-panel
+# 瞭望塔 · ppanel
 
 一个**零依赖**的 Linux 服务器监控面板。单文件 Python（标准库）+ 单文件前端，
 丢到服务器上 `python3 server.py` 就能跑，内存占用约 20 MB。
@@ -6,7 +6,7 @@
 > 起因是 1Panel 太重（常驻 156 MB），换了个思路自己搓了一个 ——
 > 结果越用越顺手，索性开源。
 
-![screenshot](docs/screenshot.png)
+![概览](docs/screenshot.png)
 
 ## 特性
 
@@ -21,11 +21,41 @@
 | **登录日志** | 记录**真实客户端 IP**（穿透 Cloudflare 隧道）+ 失败自动封禁 |
 | **服务详情** | 点任意服务卡片，展开它的专属指标（见下） |
 
+## 界面
+
+<details open>
+<summary><b>概览</b> — 四个关键指标 + 服务健康探测</summary>
+
+![概览页](docs/screenshot.png)
+
+</details>
+
+<details>
+<summary><b>服务详情</b> — 点任意卡片，展开它的专属指标与业务数据</summary>
+
+![服务详情](docs/detail.png)
+
+</details>
+
+<details>
+<summary><b>监控</b> — 15 分钟 / 1 小时 / 6 小时 / 24 小时任意切换</summary>
+
+![监控曲线](docs/monitor.png)
+
+</details>
+
+<details>
+<summary><b>登录日志</b> — 真实客户端 IP，失败自动封禁</summary>
+
+![登录日志](docs/authlog.png)
+
+</details>
+
 ## 快速开始
 
 ```bash
-git clone https://github.com/peet2269/peet-panel.git
-cd peet-panel
+git clone https://github.com/peet2269/ppanel.git
+cd ppanel
 
 # 配一下要监控哪些服务（不配也能跑，有默认示例）
 cp services.example.json config.json
@@ -172,16 +202,16 @@ backend  = auto
 ## 开机自启
 
 ```ini
-# /etc/systemd/system/peet-panel.service
+# /etc/systemd/system/ppanel.service
 [Unit]
-Description=peet-panel 轻量服务器监控
+Description=ppanel 轻量服务器监控
 After=network.target
 
 [Service]
 Type=simple
-WorkingDirectory=/opt/peet-panel
+WorkingDirectory=/opt/ppanel
 Environment=PANEL_PORT=8090
-ExecStart=/usr/bin/python3 /opt/peet-panel/server.py
+ExecStart=/usr/bin/python3 /opt/ppanel/server.py
 Restart=always
 RestartSec=3
 
@@ -190,7 +220,7 @@ WantedBy=multi-user.target
 ```
 
 ```bash
-systemctl enable --now peet-panel
+systemctl enable --now ppanel
 ```
 
 ## 环境变量
