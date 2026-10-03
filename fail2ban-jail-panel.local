@@ -1,0 +1,12 @@
+# 装到 /etc/fail2ban/jail.d/panel-auth.local
+[panel-auth]
+enabled  = true
+port     = http,https
+filter   = panel-auth
+logpath  = /var/log/nginx/panel.error.log
+findtime = 600
+maxretry = 5
+bantime  = 7200
+# ★ 务必把本机和内网加进来，否则会把自己关在门外
+ignoreip = 127.0.0.1/8 ::1 192.168.0.0/24 10.0.0.0/8
+backend  = auto

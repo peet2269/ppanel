@@ -1,0 +1,47 @@
+{
+  "_说明": "复制成 config.json 后按自己的服务改。删掉这个键也行。",
+  "services": [
+    {
+      "key": "web",
+      "name": "我的网站",
+      "url": "http://127.0.0.1:80/",
+      "note": "nginx 静态站",
+      "home": "https://example.com/",
+      "unit": "nginx",
+      "proc": "nginx: worker process",
+      "api": null,
+      "log": "example-access"
+    },
+    {
+      "key": "api",
+      "name": "我的 API",
+      "url": "http://127.0.0.1:3000/health",
+      "note": "业务接口",
+      "home": null,
+      "unit": "my-api.service",
+      "proc": "node",
+      "api": "http://127.0.0.1:3000/stats",
+      "log": null
+    },
+    {
+      "key": "db",
+      "name": "数据库",
+      "url": "http://127.0.0.1:9200/",
+      "note": "需认证也算存活",
+      "home": null,
+      "unit": "elasticsearch",
+      "proc": "java",
+      "api": null,
+      "log": null
+    }
+  ],
+  "nginx_log": "/var/log/nginx/access.log",
+  "nginx_error_log": "/var/log/nginx/error.log",
+  "thresholds": {
+    "disk_pct": 90,
+    "mem_pct": 92,
+    "load_ratio": 1.6,
+    "cpu_sustained": 95,
+    "cpu_sustain_secs": 120
+  }
+}
