@@ -1,0 +1,19 @@
+[Unit]
+Description=ppanel 轻量服务器监控
+Documentation=https://github.com/peet2269/ppanel
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/ppanel
+Environment=PANEL_PORT=8090
+ExecStart=/usr/bin/python3 /opt/ppanel/server.py
+Restart=always
+RestartSec=3
+# 面板不需要任何特权
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+
+[Install]
+WantedBy=multi-user.target
